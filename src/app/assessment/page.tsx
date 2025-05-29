@@ -1,0 +1,74 @@
+'use client';
+
+import Image from 'next/image';
+import Link from 'next/link';
+
+export default function AssessmentPage() {
+  return (
+    <div className="w-full px-4 py-12 flex flex-col items-center">
+      {/* Page Title */}
+      <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-800 mb-10 text-center">
+        Select Assessment
+      </h1>
+
+      {/* Assessment Cards */}
+      <div className="max-w-6xl w-full grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+        {/* Business Health Card */}
+        <div
+          className="bg-white rounded-2xl shadow-md sm:shadow-lg p-6 sm:p-8 flex flex-col items-center 
+                     transition-transform transform hover:scale-105 hover:shadow-xl duration-300"
+        >
+          <Image
+            src="/business_health.png"
+            alt="Illustration representing Business Health"
+            width={180}
+            height={180}
+            priority
+            className="mb-4 sm:mb-6"
+          />
+          <h2 className="text-lg sm:text-xl font-semibold mb-3 text-slate-800 text-center">
+            Business Health
+          </h2>
+          <Link href="/assessment/business-health" passHref>
+            <button
+              className="w-full sm:w-auto bg-gradient-to-r from-pink-500 to-slate-500 text-white 
+                         px-5 py-3 rounded-xl font-medium text-sm sm:text-base transition 
+                         duration-300 transform hover:scale-105 hover:shadow-md focus:outline-none 
+                         focus:ring-2 focus:ring-pink-300"
+            >
+            Start Business Health Assessment
+            </button>
+          </Link>
+        </div>
+
+        {/* Franchise Readiness Card */}
+        <div
+          className="bg-white rounded-2xl shadow-md sm:shadow-lg p-6 sm:p-8 flex flex-col items-center 
+                     transition-transform transform hover:scale-105 hover:shadow-xl duration-300"
+        >
+          <Image
+            src="/franchise.png"
+            alt="Illustration representing Franchise Readiness"
+            width={180}
+            height={180}
+            priority
+            className="mb-4 sm:mb-6"
+          />
+          <h2 className="text-lg sm:text-xl font-semibold mb-3 text-slate-800 text-center">
+            Franchise Readiness
+          </h2>
+          <Link href="/assessment/franchise-readiness" passHref>
+            <button
+              className="w-full sm:w-auto bg-gradient-to-r from-pink-500 to-slate-500 text-white 
+                         px-5 py-3 rounded-xl font-medium text-sm sm:text-base transition 
+                         duration-300 transform hover:scale-105 hover:shadow-md focus:outline-none 
+                         focus:ring-2 focus:ring-pink-300"
+            >
+              Franchise Readiness Check
+            </button>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
