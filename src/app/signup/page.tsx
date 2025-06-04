@@ -35,9 +35,13 @@ export default function SignupPage() {
       if (res.status === 201 || res.data.success) {
         router.push('/login');
       }
-    } catch (err: any) {
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        setErrorMsg(err.response?.data?.message || 'Signup failed. Try again.');
+      } else {
+        setErrorMsg('An unexpected error occurred.');
+      }
       console.error(err);
-      setErrorMsg(err.response?.data?.message || 'Signup failed. Try again.');
     }
   };
 

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import Image from 'next/image';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useRouter } from 'next/navigation';
@@ -27,10 +28,12 @@ export default function Home() {
       <section className="w-full py-20 px-4">
         <div className="max-w-5xl mx-auto flex flex-col-reverse lg:flex-row items-center lg:items-start gap-12">
           {/* Image/Illustration */}
-          <div className="w-full lg:w-1/2" data-aos="fade-right">
-            <img
-              src="businessgrowth.png"
+          <div className="w-full lg:w-1/2 relative" data-aos="fade-right">
+            <Image
+              src="/businessgrowth.png"
               alt="Business Illustration"
+              width={500}
+              height={500}
               className="w-full max-w-md mx-auto lg:mx-0"
             />
           </div>

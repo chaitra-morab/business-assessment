@@ -31,9 +31,13 @@ export default function LoginPage() {
         document.cookie = `token=${res.data.token}; path=/`;
         router.push('/assessment'); // ✅ Will hit app/assessment/page.tsx
       }
-    } catch (err: any) {
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        setErrorMsg(err.response?.data?.message || 'Login failed. Try again.');
+      } else {
+        setErrorMsg('An unexpected error occurred.');
+      }
       console.error(err);
-      setErrorMsg(err.response?.data?.message || 'Login failed. Try again.');
     }
   };
 
@@ -112,7 +116,7 @@ export default function LoginPage() {
 
           {/* Footer Text */}
           <p className="mt-6 text-sm text-center text-gray-600">
-            Don’t have an account?{' '}
+            Don&apos;t have an account?{' '}
             <Link href="/signup" className="text-pink-600 hover:underline">
               Sign Up
             </Link>

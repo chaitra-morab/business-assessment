@@ -1,9 +1,14 @@
 'use client';
 
 import { useEffect } from 'react';
+import Image from 'next/image';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import {EnvelopeIcon,MapPinIcon,PhoneIcon,FaceSmileIcon,ChatBubbleBottomCenterTextIcon,LinkIcon,} from '@heroicons/react/24/solid';
+import {
+  EnvelopeIcon,
+  MapPinIcon,
+  PhoneIcon,
+} from '@heroicons/react/24/solid';
 
 const ContactSection = () => {
   useEffect(() => {
@@ -50,10 +55,12 @@ const ContactSection = () => {
       </div>
 
       {/* Image */}
-      <div className="md:w-1/2" data-aos="fade-left">
-        <img
+      <div className="md:w-1/2 relative" data-aos="fade-left">
+        <Image
           src="/contact_us.png"
           alt="Contact Illustration"
+          width={500}
+          height={500}
           className="w-full max-w-md mx-auto"
         />
       </div>
