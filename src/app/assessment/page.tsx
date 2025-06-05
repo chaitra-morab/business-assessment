@@ -57,7 +57,7 @@ export default function AssessmentPage() {
           <h2 className="text-lg sm:text-xl font-semibold mb-3 text-slate-800 text-center">
             Franchise Readiness
           </h2>
-          <Link href="/assessment/franchise-readiness" passHref>
+          <Link href="/assessment/franchise_readiness" passHref>
             <button
               className="w-full sm:w-auto bg-gradient-to-r from-pink-500 to-slate-500 text-white 
                          px-5 py-3 rounded-xl font-medium text-sm sm:text-base transition 
