@@ -1,13 +1,12 @@
 'use client';
 
 import { useEffect } from 'react';
-import Image from 'next/image';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import {
   EnvelopeIcon,
   MapPinIcon,
-  PhoneIcon,
+  PhoneIcon
 } from '@heroicons/react/24/solid';
 
 const ContactSection = () => {
@@ -16,53 +15,55 @@ const ContactSection = () => {
   }, []);
 
   return (
-    <section className="flex flex-col-reverse md:flex-row items-center justify-between gap-10 px-6 md:px-16 py-12 bg-gray-50">
-      {/* Text Content */}
-      <div className="md:w-1/2 space-y-6" data-aos="fade-right">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Get in Touch</h2>
+    <section className="relative min-h-screen w-full bg-white overflow-hidden px-6 md:px-16 py-12">
+      {/* Grid Background */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:40px_40px] opacity-50 pointer-events-none z-0" />
 
-
-        {/* Email */}
-        <div>
-          <div className="flex items-center gap-2 mb-1 font-semibold text-lg">
-            <EnvelopeIcon className="h-6 w-6 text-blue-600" />
-            <span>CHART TO US</span>
-          </div>
-          <p className="text-blue-600 underline">Our friendly team is here to help.</p>
-          <a href="Anklyticx" className="text-yellow-600 font-medium hover:underline">Anklyticx</a>
-        </div>
-
-        {/* Location */}
-        <div>
-          <div className="flex items-center gap-2 mb-1 font-semibold text-lg">
-            <MapPinIcon className="h-6 w-6 text-blue-600" />
-            <span>OFFICE</span>
-          </div>
-          <p className="text-blue-600 underline">Come say hello at our office HQ.</p>
-          <p className="text-yellow-600 font-medium">Goa,India</p>
-        </div>
-
-        {/* Phone */}
-        <div>
-          <div className="flex items-center gap-2 mb-1 font-semibold text-lg">
-            <PhoneIcon className="h-6 w-6 text-blue-600" />
-            <span>PHONE</span>
-          </div>
-          <p className="text-blue-600">Mon–Fri from 10am to 6pm</p>
-          <p className="text-yellow-600 font-medium">+91 0000000000</p>
-        </div>
-
+      {/* Main Content */}
+      <div className="relative z-10 flex flex-col items-center text-center gap-6 py-16">
+        <h1 className="text-4xl font-bold">Contact Us</h1>
+        <p className="text-lg text-gray-600 max-w-2xl">
+          Let us know how we can help you
+        </p>
       </div>
 
-      {/* Image */}
-      <div className="md:w-1/2 relative" data-aos="fade-left">
-        <Image
-          src="/contact_us.png"
-          alt="Contact Illustration"
-          width={500}
-          height={500}
-          className="w-full max-w-md mx-auto"
-        />
+      {/* Contact Info Row */}
+      <div className="relative z-10 max-w-6xl mx-auto flex flex-wrap justify-center gap-6">
+        {/* Card: Email */}
+        <div className="bg-slate-100 flex flex-col items-start gap-2 rounded-lg shadow p-6 w-full sm:w-[300px]">
+          <div className="flex items-center gap-2 mb-1 font-semibold text-lg">
+            <EnvelopeIcon className="h-6 w-6 text-slate-700" />
+          </div>
+          <p className="text-black font-semibold">CHAT TO US</p>
+          <p className="text-gray-700">We are here to help.</p>
+          <a
+            href="mailto:hello@anklyticx.com"
+            className="text-black hover:underline font-medium"
+          >
+            hello@anklyticx.com
+          </a>
+        </div>
+
+        {/* Card: Location */}
+        <div className="bg-slate-100 flex flex-col items-start gap-2 rounded-lg shadow p-6 w-full sm:w-[300px]">
+          <div className="flex items-center gap-2 mb-1 font-semibold text-lg">
+            <MapPinIcon className="h-6 w-6 text-slate-700" />
+            
+          </div>
+          <p className="text-black font-semibold">OFFICE</p>
+          <p className="text-gray-700">Visit our office HQ.</p>
+          <p className="text-black font-medium">Goa, India</p>
+        </div>
+
+        {/* Card: Phone */}
+        <div className="bg-slate-100 flex flex-col items-start gap-2 rounded-lg shadow p-6 w-full sm:w-[300px]">
+          <div className="flex items-center gap-2 mb-1 font-semibold text-lg">
+            <PhoneIcon className="h-6 w-6 text-slate-700" />
+          </div>
+          <p className="text-black font-semibold">PHONE</p>
+          <p className="text-gray-700">Mon–Fri from 10am to 6pm</p>
+          <p className="text-black font-medium">+91 0000000000</p>
+        </div>
       </div>
     </section>
   );
