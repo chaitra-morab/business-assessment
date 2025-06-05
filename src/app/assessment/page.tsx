@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function AssessmentPage() {
   return (
-    <div className="w-full px-4 py-12 flex flex-col items-center">
+    <div className="w-full px-4 pt-24 pb-12 flex flex-col items-center">
       {/* Page Title */}
       <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-800 mb-10 text-center">
         Select Assessment
@@ -30,14 +30,15 @@ export default function AssessmentPage() {
             Business Health
           </h2>
           <Link href="/assessment/business-health" passHref>
-            <button
-              className="w-full sm:w-auto bg-gradient-to-r from-pink-500 to-slate-500 text-white 
-                         px-5 py-3 rounded-xl font-medium text-sm sm:text-base transition 
-                         duration-300 transform hover:scale-105 hover:shadow-md focus:outline-none 
-                         focus:ring-2 focus:ring-pink-300"
-            >
-            Start Business Health Assessment
-            </button>
+<button
+  className="w-full sm:w-auto bg-yellow-400 text-black 
+             px-5 py-3 rounded-xl font-medium text-sm sm:text-base 
+             transition duration-300 transform hover:scale-105 hover:shadow-md 
+             focus:outline-none focus:ring-2 focus:ring-yellow-300"
+>
+  Start Business Health Assessment
+</button>
+
           </Link>
         </div>
 
@@ -47,10 +48,10 @@ export default function AssessmentPage() {
                      transition-transform transform hover:scale-105 hover:shadow-xl duration-300"
         >
           <Image
-            src="/franchise.png"
+            src="/franchise1.png"
             alt="Illustration representing Franchise Readiness"
             width={180}
-            height={180}
+            height={175}
             priority
             className="mb-4 sm:mb-6"
           />
@@ -58,14 +59,15 @@ export default function AssessmentPage() {
             Franchise Readiness
           </h2>
           <Link href="/assessment/franchise-readiness" passHref>
-            <button
-              className="w-full sm:w-auto bg-gradient-to-r from-pink-500 to-slate-500 text-white 
-                         px-5 py-3 rounded-xl font-medium text-sm sm:text-base transition 
-                         duration-300 transform hover:scale-105 hover:shadow-md focus:outline-none 
-                         focus:ring-2 focus:ring-pink-300"
-            >
-              Franchise Readiness Check
-            </button>
+<button
+  className="w-full sm:w-auto bg-green-600 text-white 
+             px-5 py-3 rounded-xl font-medium text-sm sm:text-base transition 
+             duration-300 transform hover:scale-105 hover:shadow-md focus:outline-none 
+             focus:ring-2 focus:ring-green-400"
+>
+  Franchise Readiness Check
+</button>
+
           </Link>
         </div>
       </div>
