@@ -1,23 +1,26 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "../components/Footer";
 
+const inter = Inter({ subsets: ["latin"] });
+
 export const metadata: Metadata = {
-  title: "AI Business Assessment Tool",
-  description: "Evaluate business health & franchise readiness with AI",
+  title: "Business Assessment Tool",
+  description: "Assess your business health and franchise readiness",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body className="bg-slate-50 text-slate-800">
+      <body className={inter.className}>
         <Navbar />
-        <main className="pt-20">{children}</main>
+        <main className="pt-16">{children}</main>
         <Footer />
       </body>
     </html>

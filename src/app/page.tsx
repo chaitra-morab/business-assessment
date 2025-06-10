@@ -5,6 +5,14 @@ import Image from 'next/image';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useRouter } from 'next/navigation';
+import { authService } from '@/services/auth.service';
+import AboutSection from '@/components/AboutSection';
+import {
+  ShieldCheckIcon,
+  RocketLaunchIcon,
+  DocumentTextIcon,
+  LockClosedIcon,
+} from '@heroicons/react/24/solid';
 
 export default function Home() {
   const router = useRouter();
@@ -14,41 +22,40 @@ export default function Home() {
   }, []);
 
   const handleStartAssessment = () => {
-    const tokenExists = document.cookie.includes('token=');
-    if (tokenExists) {
+    if (authService.isAuthenticated()) {
       router.push('/assessment');
     } else {
-      router.push('/login');
+      router.push('/login?redirect=/assessment');
     }
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full bg-white">
       {/* Hero Section */}
-      <section className="w-full py-20 px-4">
-        <div className="max-w-5xl mx-auto flex flex-col-reverse lg:flex-row items-center lg:items-start gap-12">
-          {/* Image/Illustration */}
-          <div className="w-full lg:w-1/2 relative" data-aos="fade-right">
+      <section className="w-full pt-10 pb-4 px-4 sm:pt-12 sm:pb-6 md:pt-14 md:pb-6">
+        <div className="max-w-6xl mx-auto flex flex-col-reverse lg:flex-row items-center gap-4 lg:gap-6">
+          {/* Image */}
+          <div className="w-full lg:w-1/2" data-aos="fade-right">
             <Image
               src="/businessgrowth.png"
               alt="Business Illustration"
               width={500}
               height={500}
-              className="w-full max-w-md mx-auto lg:mx-0"
+              className="w-full max-w-sm mx-auto lg:mx-0"
             />
           </div>
 
-          {/* Text Content */}
+          {/* Text */}
           <div className="w-full lg:w-1/2 text-center lg:text-left" data-aos="fade-left">
-            <h1 className="text-4xl sm:text-5xl font-bold mb-4">
+            <h1 className="text-3xl sm:text-4xl font-bold mb-3 text-black">
               AI-Powered Business Assessment Tool
             </h1>
-            <p className="text-lg sm:text-xl mb-8">
+            <p className="text-base sm:text-lg mb-6 text-black">
               Evaluate your business health and franchise readiness with AI-driven insights and email reports.
             </p>
             <button
               onClick={handleStartAssessment}
-              className="bg-gradient-to-r from-slate-700 via-pink-600 to-pink-500 text-white px-6 py-3 rounded font-semibold hover:brightness-110 transition-transform transform hover:scale-105"
+              className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition"
             >
               Start Assessment
             </button>
@@ -56,29 +63,61 @@ export default function Home() {
         </div>
       </section>
 
+      {/* About Section */}
+      <AboutSection />
+
       {/* Features Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-24 max-w-7xl mx-auto text-center">
-        <h2 className="text-3xl font-bold text-pink-600 mb-10" data-aos="fade-up">
+      <section className="px-4 sm:px-6 lg:px-24 max-w-7xl mx-auto pt-6 pb-16">
+        <h2 className="text-3xl font-bold text-black mb-10 text-center" data-aos="fade-up">
           Features
         </h2>
-        <div className="grid sm:grid-cols-2 gap-6">
-          <div
-            className="bg-white shadow-md rounded-lg p-6 border-l-4 border-pink-500 transform transition-transform hover:scale-105 hover:shadow-lg"
-            data-aos="fade-up"
-          >
-            <h3 className="text-xl font-semibold mb-2">AI-Generated Reports</h3>
-            <p>Receive personalized, data-driven insights based on your answers.</p>
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-10">
+          {/* Feature 1 */}
+          <div className="flex-1 text-center" data-aos="fade-up">
+            <div className="bg-slate-700 rounded-full w-14 h-14 flex items-center justify-center mx-auto mb-2">
+              <ShieldCheckIcon className="h-8 w-8 text-white" />
+            </div>
+            <h3 className="text-lg font-semibold text-black mb-2">Business Health Check</h3>
+            <p className="text-sm text-black text-justify">
+              Answer simple questions to check your business performance in areas like finance, marketing, and daily operations.
+            </p>
           </div>
-          <div
-            className="bg-white shadow-md rounded-lg p-6 border-l-4 border-pink-500 transform transition-transform hover:scale-105 hover:shadow-lg"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            <h3 className="text-xl font-semibold mb-2">Email Delivery</h3>
-            <p>Your tailored business report is sent directly to your inbox.</p>
+
+          {/* Feature 2 */}
+          <div className="flex-1 text-center" data-aos="fade-up" data-aos-delay="100">
+            <div className="bg-slate-700 rounded-full w-14 h-14 flex items-center justify-center mx-auto mb-2">
+              <RocketLaunchIcon className="h-8 w-8 text-white" />
+            </div>
+            <h3 className="text-lg font-semibold text-black mb-2">Franchise Readiness</h3>
+            <p className="text-sm text-black text-justify">
+              Know if your business is ready to expand or become a franchise by checking key factors like brand and setup.
+            </p>
+          </div>
+
+          {/* Feature 3 */}
+          <div className="flex-1 text-center" data-aos="fade-up" data-aos-delay="200">
+            <div className="bg-slate-700 rounded-full w-14 h-14 flex items-center justify-center mx-auto mb-2">
+              <DocumentTextIcon className="h-8 w-8 text-white" />
+            </div>
+            <h3 className="text-lg font-semibold text-black mb-2">AI-Powered Reports</h3>
+            <p className="text-sm text-black text-justify">
+              After finishing the questions, get a short AI-written report with tips made just for your business — sent to your email.
+            </p>
+          </div>
+
+          {/* Feature 4 */}
+          <div className="flex-1 text-center" data-aos="fade-up" data-aos-delay="300">
+            <div className="bg-slate-700 rounded-full w-14 h-14 flex items-center justify-center mx-auto mb-2">
+              <LockClosedIcon className="h-8 w-8 text-white" />
+            </div>
+            <h3 className="text-lg font-semibold text-black mb-2">Safe Data Storage</h3>
+            <p className="text-sm text-black text-justify">
+              Your answers and details are stored safely and used only to help you get better results.
+            </p>
           </div>
         </div>
       </section>
     </div>
   );
 }
+//comment
