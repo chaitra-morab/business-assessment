@@ -63,8 +63,19 @@ const Navbar = () => {
         <div className="hidden md:flex space-x-6 items-center">
           <Link href="/" className="hover:underline">Home</Link>
           <Link href="/about" className="hover:underline">About</Link>
+<<<<<<< HEAD
           <Link href="/assessment/business-health" className="hover:underline cursor-pointer">
             Assessments
+=======
+          <Link href="/assessment" className="hover:underline">Assessments</Link>
+          <Link href="/contact" className="hover:underline">Contact</Link>
+          <Link href="/login" className="hover:underline">Login</Link>
+          <Link
+            href="/signup"
+            className=" hover:underline"
+          >
+            Sign Up
+>>>>>>> chaitra
           </Link>
           <Link href="/contact" className="hover:underline">Contact</Link>
           
@@ -102,6 +113,7 @@ const Navbar = () => {
       </div>
 
       {/* Mobile menu */}
+<<<<<<< HEAD
       {isMobileMenuOpen && (
         <div className="md:hidden px-4 pb-4 bg-slate-800 space-y-2 text-white">
           <Link href="/" className="block hover:underline" onClick={toggleMobileMenu}>Home</Link>
@@ -134,6 +146,16 @@ const Navbar = () => {
               <Link href="/signup" className="block hover:underline" onClick={toggleMobileMenu}>Sign Up</Link>
             </>
           )}
+=======
+      {mobileMenu && (
+        <div className="md:hidden px-4 pb-4 bg-slate-800  space-y-2 text-white">
+          <Link href="/" className="block hover:underline" onClick={closeMenu}>Home</Link>
+          <Link href="/about" className="block hover:underline" onClick={closeMenu}>About</Link>
+          <Link href="/assessment" className="block hover:underline" onClick={closeMenu}>Assessments</Link>
+          <Link href="/contact" className="block hover:underline" onClick={closeMenu}>Contact</Link>
+          <Link href="/login" className="block hover:underline" onClick={closeMenu}>Login</Link>
+          <Link href="/signup" className="block hover:underline" onClick={closeMenu}>Sign Up</Link>
+>>>>>>> chaitra
         </div>
       )}
     </nav>

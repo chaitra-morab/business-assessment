@@ -145,8 +145,12 @@ export default function SignupPage() {
             {/* Signup Button */}
             <button
               type="submit"
+<<<<<<< HEAD
               disabled={isLoading}
               className={`flex items-center justify-center gap-2 w-full py-2 
+=======
+              className="flex items-center justify-center gap-2 w-full py-2 
+>>>>>>> chaitra
               bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 
               rounded-md text-white font-medium text-sm transition
               ${isLoading ? 'opacity-70 cursor-not-allowed' : ''}`}

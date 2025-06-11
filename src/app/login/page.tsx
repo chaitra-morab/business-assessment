@@ -27,6 +27,7 @@ function LoginForm() {
     setError('');
 
     try {
+<<<<<<< HEAD
       await authService.login(email, password);
       const redirect = searchParams.get('redirect') || '/';
       router.push(redirect);
@@ -39,10 +40,29 @@ function LoginForm() {
       );
     } finally {
       setLoading(false);
+=======
+      const res = await axios.post('http://localhost:5000/api/auth/login', {
+        email,
+        password,
+      });
+
+      if (res.data.token) {
+        document.cookie = `token=${res.data.token}; path=/`;
+        router.push('/assessment');
+      }
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        setErrorMsg(err.response?.data?.message || 'Login failed. Try again.');
+      } else {
+        setErrorMsg('An unexpected error occurred.');
+      }
+      console.error(err);
+>>>>>>> chaitra
     }
   };
 
   return (
+<<<<<<< HEAD
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
@@ -52,6 +72,28 @@ function LoginForm() {
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
+=======
+    <div className="relative h-auto md:h-screen text-black overflow-hidden flex flex-col md:flex-row pt-24">
+      {/* Image Section */}
+      <div className="relative w-full h-64 md:h-full md:w-1/2 z-0">
+        <Image
+          src="/picturelogin.png"
+          alt="Login Illustration"
+          fill
+          className="object-cover object-top"
+          priority
+        />
+      </div>
+
+      {/* Form Section */}
+      <div className="relative w-full md:w-1/2 flex items-center justify-center px-4 sm:px-6 py-10 md:py-0 z-10 bg-white">
+        <div className="w-full max-w-md">
+          <h2 className="text-xl font-bold mb-4 text-black">Welcome Back!</h2>
+          <p className="text-sm text-gray-600 mb-5">Nice to see you again!</p>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Email */}
+>>>>>>> chaitra
             <div>
               <label htmlFor="email-address" className="sr-only">
                 Email address
@@ -66,6 +108,13 @@ function LoginForm() {
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+<<<<<<< HEAD
+=======
+                className="w-full px-4 py-2 text-sm bg-gray-100 border border-gray-300 rounded-md text-black placeholder-gray-500 
+                focus:outline-none focus:ring-2 focus:ring-pink-500 
+                hover:bg-gray-200 transition"
+                required
+>>>>>>> chaitra
               />
             </div>
             <div>
@@ -82,6 +131,13 @@ function LoginForm() {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+<<<<<<< HEAD
+=======
+                className="w-full px-4 py-2 text-sm bg-gray-100 border border-gray-300 rounded-md text-black placeholder-gray-500 
+                focus:outline-none focus:ring-2 focus:ring-pink-500 
+                hover:bg-gray-200 transition"
+                required
+>>>>>>> chaitra
               />
             </div>
           </div>
@@ -104,17 +160,36 @@ function LoginForm() {
           <div>
             <button
               type="submit"
+<<<<<<< HEAD
               disabled={loading}
               className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white ${
                 loading
                   ? 'bg-blue-400 cursor-not-allowed'
                   : 'bg-blue-600 hover:bg-blue-700'
               } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
+=======
+              className="flex items-center justify-center gap-2 mx-auto w-3/4 sm:w-2/3 md:w-1/2 lg:w-1/3 py-2 
+              bg-orange-500 hover:bg-orange-600 
+              rounded-md text-white font-medium text-sm transition"
+>>>>>>> chaitra
             >
               {loading ? 'Signing in...' : 'Sign in'}
             </button>
+<<<<<<< HEAD
           </div>
         </form>
+=======
+          </form>
+
+          {/* Footer Text */}
+          <p className="mt-6 text-sm text-center text-gray-600">
+            Don’t have an account?{' '}
+            <Link href="/signup" className="text-black underline hover:underline">
+              Sign Up
+            </Link>
+          </p>
+        </div>
+>>>>>>> chaitra
       </div>
     </div>
   );

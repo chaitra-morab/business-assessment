@@ -5,8 +5,11 @@ import Image from 'next/image';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useRouter } from 'next/navigation';
+<<<<<<< HEAD
 import { authService } from '@/services/auth.service';
 import AboutSection from '@/components/AboutSection';
+=======
+>>>>>>> chaitra
 import {
   ShieldCheckIcon,
   RocketLaunchIcon,
