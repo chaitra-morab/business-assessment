@@ -1,4 +1,3 @@
-// src/app/assessment/Franchise_Thankyou/page.tsx (Confirmed corrected code)
 'use client';
 
 import Link from 'next/link';
@@ -6,17 +5,16 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { authService } from '@/services/auth.service';
 
-export default function Franchise_Thankyou() {
+export default function FranchiseThankYou() {
   const router = useRouter();
 
   useEffect(() => {
-    // This effect ensures the user is authenticated before viewing the thank you page.
-    // If not authenticated, it redirects them to the login page.
+    // Ensure the user is authenticated before viewing the thank you page.
     if (!authService.isAuthenticated()) {
       const currentPath = window.location.pathname;
       router.push(`/login?redirect=${encodeURIComponent(currentPath)}`);
     }
-  }, [router]); // 'router' is correctly included as a dependency.
+  }, [router]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-500 flex items-center justify-center p-4 sm:p-6">
@@ -26,12 +24,11 @@ export default function Franchise_Thankyou() {
         </h1>
 
         <p className="text-base text-black mb-4 leading-relaxed">
-          Your Franchise Readiness Assessment has been successfully submitted. We appreciate your time and effort!
+          Your Assessment has been successfully submitted. We appreciate your time and effort!
         </p>
 
         <p className="text-sm text-black mb-6 leading-relaxed">
-          {/* Corrected: Using a template literal for string to handle apostrophes cleanly */}
-          {'You can now view your personalized results and recommendations via the email we\'ve sent to guide you on your franchise journey.'}
+          You can now view your personalized results and recommendations via the email we&rsquo;ve sent to guide you on your Business journey.
         </p>
 
         <Link

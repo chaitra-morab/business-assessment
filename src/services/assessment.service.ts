@@ -88,6 +88,8 @@ export interface AssessmentResponse {
 export interface AssessmentResult {
   success: boolean;
   message: string;
+  score: number;
+  status: string;
 }
 
 export interface AssessmentHistoryItem {
@@ -101,10 +103,10 @@ export interface AssessmentHistoryItem {
 
 export const assessmentService = {
   // Get all questions for the assessment
-  getQuestions: async () => {
+  getQuestions: async (questionnaireId: number = 1) => {
     try {
       console.log('Fetching questions...');
-      const response = await api.get('/questions');
+      const response = await api.get(`/questions?questionnaire_id=${questionnaireId}`);
       
       const data = response.data as QuestionsByDimension;
       console.log('Questions received:', {
@@ -120,7 +122,7 @@ export const assessmentService = {
   },
 
   // Submit assessment responses
-  submitAssessment: async (responses: AssessmentResponse[]) => {
+  submitAssessment: async (responses: AssessmentResponse[], questionnaireId: number = 1) => {
     try {
       console.log('Submitting assessment responses:', responses);
       
@@ -131,7 +133,7 @@ export const assessmentService = {
         throw new Error(validationError);
       }
 
-      const response = await api.post('/submit', { responses });
+      const response = await api.post('/submit', { responses, questionnaire_id: questionnaireId });
       console.log('Assessment submitted successfully:', response.data);
       
       return response.data as AssessmentResult;

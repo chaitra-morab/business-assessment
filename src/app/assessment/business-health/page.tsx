@@ -196,7 +196,7 @@ export default function BusinessHealthAssessment() {
       setSubmitting(true);
       const result = await assessmentService.submitAssessment(responses);
       if (result.success) {
-        router.push('/assessment/thank-you');
+        router.push('/assessment/thank_you');
       } else {
         setError('Failed to submit assessment. Please try again.');
       }

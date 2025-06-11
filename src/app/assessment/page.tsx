@@ -59,7 +59,7 @@ export default function AssessmentPage() {
             Franchise Readiness
           </h2>
           <button
-            onClick={() => router.push('/assessment/franchise_readiness')}
+            onClick={() => router.push('/assessment/franchise-readiness')}
             className="w-full sm:w-auto bg-green-600 text-white 
                      px-5 py-3 rounded-xl font-medium text-sm sm:text-base transition 
                      duration-300 transform hover:scale-105 hover:shadow-md focus:outline-none 
