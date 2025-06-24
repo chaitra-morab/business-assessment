@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 export default function AssessmentPage() {
-  const router = useRouter();
+  const router = useRouter(); 
 
   return (
     <div className="w-full px-4 pt-24 pb-12 flex flex-col items-center">
@@ -58,7 +58,6 @@ export default function AssessmentPage() {
           <h2 className="text-lg sm:text-xl font-semibold mb-3 text-slate-800 text-center">
             Franchise Readiness
           </h2>
-<<<<<<< HEAD
           <button
             onClick={() => router.push('/assessment/franchise-readiness')}
             className="w-full sm:w-auto bg-green-600 text-white 
@@ -68,18 +67,6 @@ export default function AssessmentPage() {
           >
             Franchise Readiness Check
           </button>
-=======
-          <Link href="/assessment/franchise_readiness" passHref>
-            <button
-              className="w-full sm:w-auto bg-gradient-to-r from-pink-500 to-slate-500 text-white 
-                         px-5 py-3 rounded-xl font-medium text-sm sm:text-base transition 
-                         duration-300 transform hover:scale-105 hover:shadow-md focus:outline-none 
-                         focus:ring-2 focus:ring-pink-300"
-            >
-              Franchise Readiness Check
-            </button>
-          </Link>
->>>>>>> chaitra
         </div>
       </div>
     </div>

@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { assessmentService, AssessmentQuestion, AssessmentResponse } from '@/services/assessment.service';
-import { authService } from '@/services/auth.service';
 
 interface QuestionsByDimension {
   [key: string]: AssessmentQuestion[];
@@ -36,7 +35,6 @@ export default function BusinessHealthAssessment() {
     if (err?.response?.status === 401) {
       console.log('Authentication error, redirecting to login...');
       const currentPath = window.location.pathname;
-      authService.logout();
       router.push(`/login?redirect=${encodeURIComponent(currentPath)}`);
       return;
     }
@@ -93,14 +91,6 @@ export default function BusinessHealthAssessment() {
     const checkAuthAndLoadData = async () => {
       try {
         setLoadingMessage('Checking authentication...');
-        if (!authService.isAuthenticated()) {
-          console.log('User not authenticated, redirecting to login...');
-          const currentPath = window.location.pathname;
-          router.push(`/login?redirect=${encodeURIComponent(currentPath)}`);
-          return;
-        }
-
-        setLoadingMessage('Loading assessment questions...');
         await initializeAssessment();
       } catch (err: unknown) {
         handleError(err as ApiError);
@@ -194,7 +184,13 @@ export default function BusinessHealthAssessment() {
   const handleSubmit = async () => {
     try {
       setSubmitting(true);
-      const result = await assessmentService.submitAssessment(responses);
+      const userId = localStorage.getItem('userId');
+      if (!userId) {
+        setError('User not found. Please start the assessment from the homepage.');
+        setSubmitting(false);
+        return;
+      }
+      const result = await assessmentService.submitAssessment(responses, 1, userId);
       if (result.success) {
         router.push('/assessment/thank_you');
       } else {
@@ -259,15 +255,6 @@ export default function BusinessHealthAssessment() {
               className="px-4 py-2 rounded bg-gray-500 hover:bg-gray-600 text-white"
             >
               Return to Home
-            </button>
-            <button
-              onClick={() => {
-                authService.logout();
-                router.push('/login');
-              }}
-              className="px-4 py-2 rounded bg-red-500 hover:bg-red-600 text-white"
-            >
-              Logout and Try Again
             </button>
           </div>
         </div>

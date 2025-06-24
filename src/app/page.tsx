@@ -1,34 +1,65 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useRouter } from 'next/navigation';
-<<<<<<< HEAD
-import { authService } from '@/services/auth.service';
+// import { authService } from '@/services/auth.service'; // Removed unused import
 import AboutSection from '@/components/AboutSection';
-=======
->>>>>>> chaitra
 import {
   ShieldCheckIcon,
   RocketLaunchIcon,
   DocumentTextIcon,
   LockClosedIcon,
 } from '@heroicons/react/24/solid';
+import { useAssessmentModal } from '@/components/ModalProvider';
 
 export default function Home() {
   const router = useRouter();
+  const { openModal } = useAssessmentModal();
+  const [step, setStep] = useState(0); // 0: initial, 1: business type, 2: user form
+  const [businessType, setBusinessType] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     AOS.init({ duration: 800 });
   }, []);
 
-  const handleStartAssessment = () => {
-    if (authService.isAuthenticated()) {
-      router.push('/assessment');
-    } else {
-      router.push('/login?redirect=/assessment');
+  const handleNext = () => {
+    if (!businessType) {
+      return;
+    }
+    setStep(2);
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name || !email) {
+      return;
+    }
+    setLoading(true);
+    try {
+      const res = await fetch('/api/users/check-or-create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email }),
+      });
+      setLoading(false);
+      const data = await res.json();
+      if (res.ok) {
+        if (data.userId) {
+          localStorage.setItem('userId', data.userId);
+        }
+        router.push('/assessment');
+      } else {
+        setTimeout(() => router.push('/assessment'), 1000);
+      }
+    } catch {
+      setLoading(false);
+      setTimeout(() => router.push('/assessment'), 1000);
     }
   };
 
@@ -57,11 +88,63 @@ export default function Home() {
               Evaluate your business health and franchise readiness with AI-driven insights and email reports.
             </p>
             <button
-              onClick={handleStartAssessment}
+              onClick={openModal}
               className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition"
             >
               Start Assessment
             </button>
+            {step === 1 && (
+              <div className="mt-4 bg-white p-4 rounded shadow-md">
+                <label className="block mb-2 font-semibold text-black">Select your type of business</label>
+                <select
+                  className="w-full p-2 border rounded mb-2"
+                  value={businessType}
+                  onChange={e => setBusinessType(e.target.value)}
+                >
+                  <option value="">-- Select --</option>
+                  <option value="Manufacturing">Manufacturing</option>
+                  <option value="Service">Service</option>
+                  <option value="Merchandising">Merchandising</option>
+                  <option value="Hybrid">Hybrid</option>
+                  <option value="Agriculture">Agriculture</option>
+                </select>
+                <button
+                  onClick={handleNext}
+                  className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+                >
+                  Next
+                </button>
+              </div>
+            )}
+            {step === 2 && (
+              <form onSubmit={handleFormSubmit} className="mt-4 bg-white p-4 rounded shadow-md">
+                <div className="mb-2">
+                  <label className="block mb-1 font-semibold text-black">Name</label>
+                  <input
+                    type="text"
+                    className="w-full p-2 border rounded"
+                    value={name}
+                    onChange={e => setName(e.target.value)}
+                  />
+                </div>
+                <div className="mb-2">
+                  <label className="block mb-1 font-semibold text-black">Email</label>
+                  <input
+                    type="email"
+                    className="w-full p-2 border rounded"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+                  disabled={loading}
+                >
+                  {loading ? 'Processing...' : 'Start Assessment'}
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </section>

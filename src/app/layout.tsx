@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "../components/Footer";
-
-const inter = Inter({ subsets: ["latin"] });
+import ClientLayout from "./layoutClient";
 
 export const metadata: Metadata = {
   title: "Business Assessment Tool",
   description: "Assess your business health and franchise readiness",
 };
+
+const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
@@ -19,10 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
-        <main className="pt-16">{children}</main>
-        <Footer />
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );
 }
+

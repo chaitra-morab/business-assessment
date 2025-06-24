@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { assessmentService, AssessmentQuestion, AssessmentResponse } from '@/services/assessment.service';
-import { authService } from '@/services/auth.service';
 
 interface QuestionsByDimension {
   [key: string]: AssessmentQuestion[];
@@ -50,10 +49,6 @@ export default function FranchiseReadiness() {
       setLoading(true);
       setError('');
       setLoadingMessage('Initializing...');
-      if (!await authService.isAuthenticated()) {
-        router.push('/login');
-        return;
-      }
       setLoadingMessage('Loading assessment questions...');
       const questionsData = await assessmentService.getQuestions(2);
       if (!questionsData || Object.keys(questionsData).length === 0) {
@@ -68,7 +63,7 @@ export default function FranchiseReadiness() {
     } catch (err) {
       handleError(err);
     }
-  }, [handleError, router]);
+  }, [handleError]);
 
   useEffect(() => {
     initializeAssessment();
@@ -106,7 +101,13 @@ export default function FranchiseReadiness() {
   const handleSubmit = async () => {
     setSubmitting(true);
     try {
-      const result = await assessmentService.submitAssessment(responses, 2);
+      const userId = localStorage.getItem('userId');
+      if (!userId) {
+        setError('User not found. Please start the assessment from the homepage.');
+        setSubmitting(false);
+        return;
+      }
+      const result = await assessmentService.submitAssessment(responses, 2, userId);
       if (result.success) {
         router.push(`/assessment/thank_you?score=${result.score}&status=${encodeURIComponent(result.status)}`);
       } else {
@@ -161,15 +162,6 @@ export default function FranchiseReadiness() {
               className="px-4 py-2 rounded bg-gray-500 hover:bg-gray-600 text-white"
             >
               Return to Home
-            </button>
-            <button
-              onClick={() => {
-                authService.logout();
-                router.push('/login');
-              }}
-              className="px-4 py-2 rounded bg-red-500 hover:bg-red-600 text-white"
-            >
-              Logout and Try Again
             </button>
           </div>
         </div>

@@ -1,21 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { authService } from '@/services/auth.service';
 
 export default function FranchiseThankYou() {
-  const router = useRouter();
-
-  useEffect(() => {
-    // Ensure the user is authenticated before viewing the thank you page.
-    if (!authService.isAuthenticated()) {
-      const currentPath = window.location.pathname;
-      router.push(`/login?redirect=${encodeURIComponent(currentPath)}`);
-    }
-  }, [router]);
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-500 flex items-center justify-center p-4 sm:p-6">
       <div className="max-w-md w-full bg-slate-100 shadow-xl rounded-2xl p-8 text-center border border-gray-100 transform hover:scale-[1.01] transition-transform duration-300">
@@ -32,7 +19,7 @@ export default function FranchiseThankYou() {
         </p>
 
         <Link
-          href="/assessment"
+          href="/"
           className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-300 transform hover:scale-105"
         >
           <svg
@@ -48,7 +35,7 @@ export default function FranchiseThankYou() {
               d="M9 5l7 7-7 7"
             />
           </svg>
-          Back to Assessments Home
+          Back to Home
         </Link>
       </div>
     </div>

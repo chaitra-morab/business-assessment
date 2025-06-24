@@ -1,0 +1,1 @@
+// This file is obsolete. Authentication is no longer required. 
