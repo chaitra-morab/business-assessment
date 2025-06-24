@@ -14,9 +14,7 @@ const Navbar = () => {
     setMounted(true);
   }, []);
 
-  if (!mounted) {
-    return null;
-  }
+  if (!mounted) return null;
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -24,9 +22,13 @@ const Navbar = () => {
 
   return (
     <nav className="w-full fixed top-0 left-0 z-50 bg-slate-800 shadow-md text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between h-16 items-center">
-        <Link href="/" className="text-xl font-bold text-white">AI Assessment Tool</Link>
-        {/* Desktop */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+        {/* Brand */}
+        <Link href="/" className="text-xl font-bold text-white">
+          AI Assessment Tool
+        </Link>
+
+        {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6 items-center">
           <Link href="/" className="hover:underline">Home</Link>
           <Link href="/about" className="hover:underline">About</Link>
@@ -40,19 +42,29 @@ const Navbar = () => {
           <Link href="/contact" className="hover:underline">Contact</Link>
           <Link href="/admin/login" className="hover:underline font-semibold text-yellow-300">Admin Dashboard</Link>
         </div>
-        {/* Mobile toggle button */}
-        <button onClick={toggleMobileMenu} className="md:hidden w-8 h-8">
-          {isMobileMenuOpen ? <XMarkIcon className="text-white" /> : <Bars3Icon className="text-white" />}
+
+        {/* Mobile Menu Toggle Button */}
+        <button
+          onClick={toggleMobileMenu}
+          className="md:hidden w-8 h-8 focus:outline-none"
+          aria-label="Toggle Menu"
+        >
+          {isMobileMenuOpen ? (
+            <XMarkIcon className="h-6 w-6 text-white" />
+          ) : (
+            <Bars3Icon className="h-6 w-6 text-white" />
+          )}
         </button>
       </div>
-      {/* Mobile menu */}
+
+      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden px-4 pb-4 bg-slate-800 space-y-2 text-white">
           <Link href="/" className="block hover:underline" onClick={toggleMobileMenu}>Home</Link>
           <Link href="/about" className="block hover:underline" onClick={toggleMobileMenu}>About</Link>
           <button
             type="button"
-            className="block hover:underline w-full text-left bg-transparent border-none outline-none text-inherit"
+            className="block w-full text-left hover:underline bg-transparent border-none outline-none text-inherit"
             onClick={() => { openModal(); toggleMobileMenu(); }}
           >
             Assessments
